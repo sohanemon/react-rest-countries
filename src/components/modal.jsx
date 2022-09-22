@@ -1,7 +1,15 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 export default function Modal({ isOpen, setIsOpen, country }) {
+  const [countryInfo, setCountryInfo] = useState({});
+  useEffect(() => {
+    fetch(`https://restcountries.com/v3.1/name/${country}`).then((res) =>
+      res.json().then((data) => setCountryInfo(data))
+    );
+    return () => {};
+  }, []);
+  console.log(countryInfo);
   function closeModal() {
     setIsOpen(false);
   }
@@ -42,8 +50,8 @@ export default function Modal({ isOpen, setIsOpen, country }) {
                   </Dialog.Title>
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
+                      Area: {countryInfo.area} Population:{" "}
+                      {countryInfo.population}
                     </p>
                   </div>
 
