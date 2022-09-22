@@ -1,6 +1,5 @@
-import { Fragment, useContext, useState } from "react";
-import { Combobox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+import { useContext, useState } from "react";
+import { Combobox } from "@headlessui/react";
 import { CountriesContext } from "../App";
 
 function SearchBox() {
@@ -18,6 +17,7 @@ function SearchBox() {
         });
 
   return (
+<<<<<<< HEAD
     <div className='fixed top-16 w-72'>
       <Combobox value={selected} onChange={setSelected}>
         <div className='relative mt-1'>
@@ -89,6 +89,18 @@ function SearchBox() {
         </div>
       </Combobox>
     </div>
+=======
+    <Combobox value={selected} onChange={setSelected}>
+      <Combobox.Input onChange={(event) => setQuery(event.target.value)} />
+      <Combobox.Options>
+        {filteredCountries.map((country) => (
+          <Combobox.Option key={country.cca2} value={country.name.common}>
+            {country.name.common}
+          </Combobox.Option>
+        ))}
+      </Combobox.Options>
+    </Combobox>
+>>>>>>> parent of 84a8798 (combobox added)
   );
 }
 
