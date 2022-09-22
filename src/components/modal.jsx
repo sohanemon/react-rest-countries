@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-export default function Modal({ state }) {
-  let [isOpen, setIsOpen] = useState(state);
+export default function Modal({ isOpen, setIsOpen }) {
+  //   let [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
     setIsOpen(false);
@@ -14,14 +14,15 @@ export default function Modal({ state }) {
 
   return (
     <>
-      <div className='inset-0 flex items-center justify-center'>
+      {/* <div className='fixed inset-0 flex items-center justify-center'>
         <button
           type='button'
+          onClick={openModal}
           className='px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
         >
           Open dialog
         </button>
-      </div>
+      </div> */}
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>

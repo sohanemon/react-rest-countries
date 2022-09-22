@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
-import { Combobox } from "@headlessui/react";
+import { Fragment, useContext, useState } from "react";
+import { Combobox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
+
 import { CountriesContext } from "../App";
 
-function SearchBox() {
+function SearchBox({ isOpen, setIsOpen }) {
   const countries = useContext(CountriesContext);
   const [selected, setSelected] = useState(countries[0]);
   const [query, setQuery] = useState("");
@@ -15,14 +17,19 @@ function SearchBox() {
             .toLowerCase()
             .includes(query.toLowerCase());
         });
+  const showModal = () => {
+    setSelected();
+    setIsOpen(true);
+  };
 
   return (
-    <div className='fixed top-16 w-72'>
-      <Combobox value={selected} onChange={setSelected}>
+    <div className='sticky mx-auto top-16 w-72'>
+      <Combobox value={selected} onChange={showModal}>
         <div className='relative mt-1'>
           <div className='relative w-full overflow-hidden text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm'>
             <Combobox.Input
-              className='w-full py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 border-none focus:ring-0'
+              className='w-full py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 border-none outline-none focus:ring-0'
+              displayValue={(country) => country?.name?.common || "search"}
               onChange={(event) => setQuery(event.target.value)}
             />{" "}
             <Combobox.Button className='absolute inset-y-0 right-0 flex items-center pr-2'>
@@ -63,7 +70,12 @@ function SearchBox() {
                     value={country}
                   >
                     {({ selected, active }) => (
-                      <>
+                      <div className='flex gap-3'>
+                        <img
+                          src={country?.flags?.svg}
+                          alt='flag'
+                          className='w-10'
+                        />
                         <span
                           className={`block truncate ${
                             selected ? "font-medium" : "font-normal"
@@ -80,7 +92,7 @@ function SearchBox() {
                             <CheckIcon className='w-5 h-5' aria-hidden='true' />
                           </span>
                         ) : null}
-                      </>
+                      </div>
                     )}
                   </Combobox.Option>
                 ))

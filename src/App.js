@@ -11,13 +11,13 @@ function App() {
       .then((data) => setCountries(data));
   }, []);
   const [countries, setCountries] = useState([]);
-
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <CountriesContext.Provider value={countries}>
       <SearchBox isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className='p-10'>
-        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
         <Countries />
       </div>
     </CountriesContext.Provider>
