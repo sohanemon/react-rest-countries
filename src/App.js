@@ -12,12 +12,17 @@ function App() {
   }, []);
   const [countries, setCountries] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [country, setCountry] = useState();
+  console.log(country);
   return (
     <CountriesContext.Provider value={countries}>
-      <SearchBox isOpen={isOpen} setIsOpen={setIsOpen} />
+      <SearchBox
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        setCountry={setCountry}
+      />
       <div className='p-10'>
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} country={country} />
         <Countries />
       </div>
     </CountriesContext.Provider>

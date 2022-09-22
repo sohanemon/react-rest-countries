@@ -1,14 +1,14 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 import { CountriesContext } from "../App";
 
-function SearchBox({ isOpen, setIsOpen }) {
+function SearchBox({ isOpen, setIsOpen, setCountry }) {
   const countries = useContext(CountriesContext);
   const [selected, setSelected] = useState(countries[0]);
   const [query, setQuery] = useState("");
-
+  const input = useRef(null);
   const filteredCountries =
     query === ""
       ? countries
@@ -18,6 +18,7 @@ function SearchBox({ isOpen, setIsOpen }) {
             .includes(query.toLowerCase());
         });
   const showModal = () => {
+    setCountry(input.current.value);
     setSelected();
     setIsOpen(true);
   };
@@ -28,6 +29,7 @@ function SearchBox({ isOpen, setIsOpen }) {
         <div className='relative mt-1'>
           <div className='relative w-full overflow-hidden text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm'>
             <Combobox.Input
+              ref={input}
               className='w-full py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 border-none outline-none focus:ring-0'
               displayValue={(country) => country?.name?.common || "search"}
               onChange={(event) => setQuery(event.target.value)}
