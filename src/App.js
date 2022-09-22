@@ -17,7 +17,7 @@ function App() {
     <CountriesContext.Provider value={countries}>
       <SearchBox isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className='p-10'>
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         <Countries />
       </div>
     </CountriesContext.Provider>
