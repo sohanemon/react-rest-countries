@@ -8,8 +8,7 @@ export default function Modal({ isOpen, setIsOpen, country }) {
       res.json().then((data) => setCountryInfo(data))
     );
     return () => {};
-  }, []);
-  console.log(countryInfo);
+  }, [country]);
   function closeModal() {
     setIsOpen(false);
   }
@@ -50,8 +49,8 @@ export default function Modal({ isOpen, setIsOpen, country }) {
                   </Dialog.Title>
                   <div className='mt-2'>
                     <p className='text-sm text-gray-500'>
-                      Area: {countryInfo.area} Population:{" "}
-                      {countryInfo.population}
+                      Area: {countryInfo?.area} Population:{" "}
+                      {countryInfo?.population}
                     </p>
                   </div>
 

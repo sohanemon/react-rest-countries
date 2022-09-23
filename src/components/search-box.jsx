@@ -18,9 +18,9 @@ function SearchBox({ isOpen, setIsOpen, setCountry }) {
             .includes(query.toLowerCase());
         });
   const showModal = () => {
-    setCountry(input.current.value);
     setSelected();
     setIsOpen(true);
+    setCountry(input.current.value);
   };
 
   return (
