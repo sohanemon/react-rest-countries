@@ -19,8 +19,11 @@ function SearchBox({ isOpen, setIsOpen, setCountry }) {
         });
   const showModal = () => {
     setSelected();
+    setTimeout(() => {
+      setCountry(input.current.value);
+    }, 100);
+    //note: state is asynchronous. so we need to wait until the render is complete
     setIsOpen(true);
-    setCountry(input.current.value);
   };
 
   return (

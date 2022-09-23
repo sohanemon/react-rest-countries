@@ -13,7 +13,6 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [country, setCountry] = useState();
-  console.log(country);
   return (
     <CountriesContext.Provider value={countries}>
       <SearchBox
